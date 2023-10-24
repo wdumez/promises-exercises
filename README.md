@@ -1,6 +1,8 @@
 # promises-exercises
 
-Set of exercises in using JS promises for handling asynchronous operations.
+A set of exercises to learn about asynchronous programming using Promises in JavaScript.
+
+Fill in the blanks to make all the tests green.
 
 Adapted from [this repository](https://github.com/lighthouse-labs/promises-exercises) by Lighthouse Labs.
 
