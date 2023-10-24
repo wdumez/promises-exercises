@@ -2,6 +2,8 @@
 
 Set of exercises in using JS promises for handling asynchronous operations.
 
+Adapted from [this repository](https://github.com/lighthouse-labs/promises-exercises) by Lighthouse Labs.
+
 ## Setup
 
 Verify that `node --version` returns at least `v19.0.0` or later.
