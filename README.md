@@ -14,7 +14,7 @@ If not, install a recent version of node.js per the standard [installation instr
 
 ## Using
 
-For these exercises, there are a few folders, each corresponding to a step in the lesson. Each of them has a `README.md`, a `test.js`, and an `answers.js`.  Read the   README.md for further instructions, implement the methods in the `answers.js`, passing the tests in the `tests.js` file.  The answers has a 
+For these exercises, there are a few folders, each corresponding to a step in the lesson. Each of them has a `README.md`, a `test.js`, and an `answers.js`.  Read the `README.md` for further instructions, implement the methods in the `answers.js`, passing the tests in the `tests.js` file.
 
 > Quick tip:  To run any of the exercises below in watch mode, add `-- --watch`, (e.g. `npm run 01-making-promises -- --watch`)
 
