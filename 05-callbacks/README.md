@@ -64,21 +64,3 @@ We're going to return a promise, and get rid of that callback.
 ```
 
 We already have most of this written out.  We'll use the Promise constructor, and call passwordCheckerCb from within it.
-
-## Exercise 2
-
-Now, we're going to make a more general version of this pattern.  Let's say that we have a function that takes in a set of parameters and returns something.  In the case of "passwordChecker", those params are an email and a password.  The three versions look like this:
-
-* SYNC `(email: string, password:string) => User`
-* CALLBACK `(email: string, password:string, cb: (Error, User) => void) => void`
-* PROMISE `(email: string, password:string) => Promise<User, Error>`
-
-In this example, we are going to make a general purpose function.  It accepts a function that would accept some params and a node-style callback, and it accepts all the params it needs, and returns a function.
-
-For instance, if we called:
-
-```js
-makePromiseFromFunctionWithCallback(passwordCheckerCb, "jeff@jeff.jeff", "jeff");
-```
-
-It would return with a Promise that resolved with the value or rejected with an error based on the success or failure of calling `passwordCheckerCb("jeff@jeff.jeff", "jeff")`.  In other words, it would be identical to calling `passwordCheckerPrms("jeff@jeff.jeff", "jeff")`

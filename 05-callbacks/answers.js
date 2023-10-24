@@ -43,23 +43,6 @@ function passwordCheckerPrms(email, password){
 }
 
 /**
- * 
- * EXERCISE 2
- * 
- * @param {callbackStyleAsyncFunction} fn
- * @param {*} fnParams 
- * @return {Promise<any, any>}
- */
-function makePromiseFromFunctionWithCallback(fn, ...fnParams){
-  /* 
-  Return a promise that 
-    - calls fn with the fnParams and a callback (like fn(...fnParams, cb))
-    - resolves with a value if the callback succeeds
-    - rejects with an error if the callback fails
-  */
-}
-
-/**
  * @callback callbackStyleAsyncFunction
  * @param {*[]} fnParams
  * @param {nodeStyleCallback}
@@ -74,5 +57,4 @@ function makePromiseFromFunctionWithCallback(fn, ...fnParams){
 module.exports = {
   passwordCheckerCb,
   passwordCheckerPrms,
-  makePromiseFromFunctionWithCallback,
 };

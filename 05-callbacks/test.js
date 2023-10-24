@@ -73,38 +73,3 @@ describe('EX1: #passwordCheckerPrms(email:string, password:string): Promise<User
       }); 
   });
 });
-describe('EX2: #makePromiseFromFunctionWithCallback:(fn:([...params,] cb: (err:E, val:T) => void)) => void)=>([...params]) => Promise<T,E>', () => {
-  it('turns a resolving callback function into a resolving promise', () => {
-    function resolver(cb){
-      cb(null, 'Hello');
-    }
-    return makePromiseFromFunctionWithCallback(resolver)
-      .then(val => {
-        assert.equal(val, 'Hello');
-      });
-  });
-  it('turns a rejecting callback function into a rejecting promise', () => {
-    function rejector(cb){
-      cb('Boo!');
-    }
-    return makePromiseFromFunctionWithCallback(rejector)
-      .then(() => {
-        assert.fail('This should have rejected');
-      }, (err) => {
-        assert.equal(err, 'Boo!');
-      });
-  });
-
-  it('takes params in the returning function', () => {
-    function delayedResolver(firstVal, secondVal, cb){
-      setTimeout(() => {
-        cb(null, firstVal + ' ' + secondVal);
-      }, 500);
-    }
-
-    return makePromiseFromFunctionWithCallback(delayedResolver, 'Hello', 'World')
-      .then((val) => {
-        assert.equal(val, 'Hello World');
-      });
-  });
-});
