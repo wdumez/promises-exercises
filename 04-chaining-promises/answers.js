@@ -36,8 +36,36 @@ function makeGetUserByIdWithOrganization(getUserById, getOrganizationById){
   };
 }
 
+/**
+ * 
+ * EXERCISE 4
+ * 
+ * @param {function} getUserById 
+ * @param {function} getOrganizationById 
+*/
+function makeGetUserAndOrganizationById(getUserById, getOrganizationById){
+  return function getUserByIdWithOrganization(userId, organizationId){
+    /* IMPLEMENT ME! */
+  };
+}
+
+/**
+ * 
+ * EXERCISE 5
+ * 
+ * @param {function} getUserById 
+ * @param {function} getOrganizationById 
+ */
+function makeGetUsersByIdWithOrganizations(getUserById, getOrganizationById){
+  return function getUserByIdWithOrganization(userIds){
+    /* IMPLEMENT ME! */
+  };
+}
+
 module.exports = {
   flatMapPromise,
   chainTwoAsyncProcesses,
   makeGetUserByIdWithOrganization,
+  makeGetUserAndOrganizationById,
+  makeGetUsersByIdWithOrganizations,
 };

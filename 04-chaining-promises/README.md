@@ -60,3 +60,21 @@ We can't get the organization object until we have the user object and the organ
 It's also worth noting that the getUserById function will resolve with undefined if no user is found with that id.  Then we don't have to request the organization at all!
 
 For this example, the test creates the getUserById and getOrganizationById functions, then passes them to a function that itself returns the function we want to build: one which takes in a userId and returns a combined object.
+
+## Exercise 4
+
+Building on the scenario from Exercise 3, let's assume that we are now given both the user's userId and organizationId. This means we can now fetch the user and organization objects from their respective databases simultaneously. Doing both calls "in parallel" reduces network latency, making our app more responsive.
+
+Refactor your code from exercise 3 so that the objects are fetched simultaneously before merging them. If either user or organization id is not found, then the result should still be `undefined`.
+
+**Hint:** have a look at the documentation of [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) and see if you can make use of this function to simplify the task of waiting on two promises.
+
+## Exercise 5
+
+In this exercise we go back to the setup of exercise 3: you are given just the user id, and need to fetch the user and then, based on the retrieved organization id, fetch the user's organization info.
+
+However, this time around, we will retrieve the user information in batch. So instead of a single user id, your function is given an *array* of user ids. Your task is to fetch the information of all the users from the database.
+
+The order in which you retrieve the user or organization information from the database does not matter, as long as you return the enriched user information in the same order as the input user id's.
+
+Your function should return an array of objects, with the same length as the input array. If the data for any user or organization is missing in the database, the resulting position in the output array should be set to `undefined`.

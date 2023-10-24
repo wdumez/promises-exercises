@@ -1,52 +1,54 @@
 /* eslint-env mocha */
-
 const assert = require('assert');
 const {
-  flatMapPromise, 
+  makePromiseResolveWith3,
+  makePromiseRejectWithBoo,
   chainTwoAsyncProcesses,
-  makeGetUserByIdWithOrganization,
-  makeGetUserAndOrganizationById,
-  makeGetUsersByIdWithOrganizations,
+  makeAsyncGetUserByIdWithOrganization,
+  makeAsyncGetUserAndOrganizationById,
+  makeAsyncGetUsersByIdWithOrganizations,
 } = require('./answers');
 
-describe('Chaining Promises with .then(cb) and .catch(cb)', () => {
-  describe('#flatMapPromise(promise, asyncTransformer) => Promise', () => {
-    context('If the first promise resolves', () => {
-      const firstPromise = Promise.resolve(3);
-      it('resolves with the value of the second promise', () => {
-        const resolveAndSquare = (val) => Promise.resolve(val * val);
-        return flatMapPromise(firstPromise, resolveAndSquare)
-          .then((val) => {
-            assert.equal(val, 9);
-          });
-      });
-      it('rejects with the error of the second promise', () => {
-        const freakOut = (val) => Promise.reject(`Boo! ${val}`);
-        return flatMapPromise(firstPromise, freakOut)
-          .then((val) => {
-            assert.fail(`This should not have resolved!  It resolved with ${val}`);
-          }, (err) => {
-            assert.equal(err, 'Boo! 3');
-          });
-      });  
+describe('Async function that returns a Promise to be fufilled', () => {
+  describe('async fn makePromiseResolveWith3:() => Promise<number>', () => {
+    it('is an async function', () => {
+      assert(makePromiseResolveWith3.constructor.name === 'AsyncFunction');
     });
-    context('If the first promise rejects', () => {
-      it('rejects with the error of the first promise', () => {
-        return flatMapPromise(Promise.reject('Boo!'), (val) => Promise.reject(val))
-          .then((val) => {
-            assert.fail(`This should not have resolved!  It resolved with ${val}`);
-          }, (err) => {
-            assert.equal(err, 'Boo!');
-          });
-      });
+    it('creates a resolving promise', () => {
+      return makePromiseResolveWith3()
+        .then((val) => {
+          assert.equal(val, 3);
+        });
     });
   });
-  
+});
+
+describe('Async function that returns a Promise to be rejected', () => {
+  describe('#async fn makePromiseRejectWithBoo:() => Promise<,string>', () => {
+    it('is an async function', () => {
+      assert(makePromiseRejectWithBoo.constructor.name === 'AsyncFunction');
+    });
+    it('creates a rejecting promise', () => {
+      return makePromiseRejectWithBoo()
+        .then(() => {
+          assert.fail('This promise should have rejected, not resolved');
+        }, (err) => {
+          assert.equal(err, 'Boo!');
+        });
+    });
+  });
+});
+
+describe('Async function that chains two async processes', () => {
   describe('#chainTwoAsyncProcesses(firstPromise, slowAsyncProcess)', () => {
+    it('is an async function', () => {
+      assert(chainTwoAsyncProcesses.constructor.name === 'AsyncFunction');
+    });
+  
     it('runs a slow process on the result of the numberPromise', () => {
       const time = new Date();
       const numberPromise = Promise.resolve(31);
-
+  
       function slowSquarer(num){
         return new Promise((resolve) => {
           setTimeout(() => {
@@ -54,21 +56,24 @@ describe('Chaining Promises with .then(cb) and .catch(cb)', () => {
           }, 1000);
         });
       }
-
+  
       return chainTwoAsyncProcesses(numberPromise, slowSquarer)
         .then((val) => {
-
+  
           assert.equal(val, 961);
-
+  
           const timeElapsed = new Date() - time;
-
+  
           assert(timeElapsed >= 975, 'Process too quick.  Are you sure that you chained the two processes?');
-
+  
           assert(timeElapsed <= 1025, 'Process too slow.');
         });
     });
   });
-  describe('#makeGetUserByIdWithOrganization(getUserById, getOrganizationById) => (id) => Promise', () => {
+});
+
+describe('Use async functions to fetch user data from a database', () => {
+  describe('#makeAsyncGetUserByIdWithOrganization(getUserById, getOrganizationById) => async (id) => Promise', () => {
     const users = {
       'u001': {id: 'u001', name: 'Jeff', email: 'jeff@jeff.jeff', organizationId: 'o001'},
       'u002': {id: 'u002', name: 'Joan', email: 'joan@joan.joan', organizationId: 'o002'},
@@ -77,7 +82,7 @@ describe('Chaining Promises with .then(cb) and .catch(cb)', () => {
       'o001': {id: 'o001', name: 'Operations'},
       'o002': {id: 'o002', name: 'Marketing'},
     };
-
+  
     function getUserById(id){
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -92,15 +97,19 @@ describe('Chaining Promises with .then(cb) and .catch(cb)', () => {
         }, 500);
       });
     }
-    const getUserByIdWithOrganization = makeGetUserByIdWithOrganization(getUserById, getOrganizationById);
-
+    const getUserByIdWithOrganization = makeAsyncGetUserByIdWithOrganization(getUserById, getOrganizationById);
+  
+    it('is an async function', () => {
+      assert(getUserByIdWithOrganization.constructor.name === 'AsyncFunction');
+    });
+  
     it('gets a user and their organization if the user and organization exist', () => {
       const start = new Date();
       return getUserByIdWithOrganization('u001')
         .then((userWithOrganization) => {
           const correctUser = users['u001'];
           const correctOrganization = organizations[correctUser.organizationId];
-          
+            
           assert.deepEqual(userWithOrganization, {
             ...correctUser, 
             organization: correctOrganization,
@@ -119,10 +128,8 @@ describe('Chaining Promises with .then(cb) and .catch(cb)', () => {
         });
     });
   });
-});
-
-describe('Combining Promises with the Promise.all combinator', () => {
-  describe('#makeGetUserAndOrganizationById(getUserById, getOrganizationById) => (userId, organizationId) => Promise', () => {
+  
+  describe('#makeAsyncGetUserAndOrganizationById(getUserById, getOrganizationById) => async (userId, organizationId) => Promise', () => {
     const users = {
       'u001': {id: 'u001', name: 'Jeff', email: 'jeff@jeff.jeff', organizationId: 'o001'},
       'u002': {id: 'u002', name: 'Joan', email: 'joan@joan.joan', organizationId: 'o002'},
@@ -131,7 +138,7 @@ describe('Combining Promises with the Promise.all combinator', () => {
       'o001': {id: 'o001', name: 'Operations'},
       'o002': {id: 'o002', name: 'Marketing'},
     };
-
+  
     function getUserById(id){
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -146,15 +153,19 @@ describe('Combining Promises with the Promise.all combinator', () => {
         }, 500);
       });
     }
-    const getUserAndOrganizationById = makeGetUserAndOrganizationById(getUserById, getOrganizationById);
-
+    const getUserAndOrganizationById = makeAsyncGetUserAndOrganizationById(getUserById, getOrganizationById);
+  
+    it('is an async function', () => {
+      assert(getUserAndOrganizationById.constructor.name === 'AsyncFunction');
+    });
+  
     it('gets a user and their organization if the user and organization exist', () => {
       const start = new Date();
       return getUserAndOrganizationById('u001', 'o001')
         .then((userWithOrganization) => {
           const correctUser = users['u001'];
           const correctOrganization = organizations[correctUser.organizationId];
-          
+            
           assert.deepEqual(userWithOrganization, {
             ...correctUser, 
             organization: correctOrganization,
@@ -182,7 +193,8 @@ describe('Combining Promises with the Promise.all combinator', () => {
         });
     });
   });
-  describe('#makeGetUsersByIdWithOrganizations(getUserById, getOrganizationById) => (ids) => Promise', () => {
+  
+  describe('#makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById) => async (ids) => Promise', () => {
     const users = {
       'u001': {id: 'u001', name: 'Jeff', email: 'jeff@jeff.jeff', organizationId: 'o001'},
       'u002': {id: 'u002', name: 'Joan', email: 'joan@joan.joan', organizationId: 'o002'},
@@ -191,7 +203,7 @@ describe('Combining Promises with the Promise.all combinator', () => {
       'o001': {id: 'o001', name: 'Operations'},
       'o002': {id: 'o002', name: 'Marketing'},
     };
-
+  
     function getUserById(id){
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -206,8 +218,12 @@ describe('Combining Promises with the Promise.all combinator', () => {
         }, 500);
       });
     }
-    const getUsersByIdWithOrganizations = makeGetUsersByIdWithOrganizations(getUserById, getOrganizationById);
-
+    const getUsersByIdWithOrganizations = makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById);
+  
+    it('is an async function', () => {
+      assert(getUsersByIdWithOrganizations.constructor.name === 'AsyncFunction');
+    });
+  
     it('gets users and their organizations if the user and organization exist', () => {
       const start = new Date();
       return getUsersByIdWithOrganizations(['u001', 'u002'])

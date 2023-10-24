@@ -31,3 +31,9 @@ These exercises are all about learning the mechanisms that we can use to create,
 Now it's time to use the tricks from above to solve some problems.
 
 * `npm run 05-callbacks` - Turn callback-centric functions into promise-centric functions.
+
+### Async Functions
+
+Leverage `async` functions to refactor code that uses `.then(cb)` to use sequential control flow instead.
+
+* `npm run 06-async-functions` - Turn promise-centric functions into async functions.
