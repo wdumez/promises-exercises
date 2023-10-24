@@ -10,7 +10,7 @@ const {
 } = require('./answers');
 
 describe('Chaining Promises with .then(cb) and .catch(cb)', () => {
-  describe('#flatMapPromise(promise, asyncTransformer) => Promise', () => {
+  describe('EX1: #flatMapPromise(promise, asyncTransformer) => Promise', () => {
     context('If the first promise resolves', () => {
       const firstPromise = Promise.resolve(3);
       it('resolves with the value of the second promise', () => {
@@ -42,7 +42,7 @@ describe('Chaining Promises with .then(cb) and .catch(cb)', () => {
     });
   });
   
-  describe('#chainTwoAsyncProcesses(firstPromise, slowAsyncProcess)', () => {
+  describe('EX2: #chainTwoAsyncProcesses(firstPromise, slowAsyncProcess)', () => {
     it('runs a slow process on the result of the numberPromise', () => {
       const time = new Date();
       const numberPromise = Promise.resolve(31);
@@ -68,7 +68,7 @@ describe('Chaining Promises with .then(cb) and .catch(cb)', () => {
         });
     });
   });
-  describe('#makeGetUserByIdWithOrganization(getUserById, getOrganizationById) => (id) => Promise', () => {
+  describe('EX3: #makeGetUserByIdWithOrganization(getUserById, getOrganizationById) => (id) => Promise', () => {
     const users = {
       'u001': {id: 'u001', name: 'Jeff', email: 'jeff@jeff.jeff', organizationId: 'o001'},
       'u002': {id: 'u002', name: 'Joan', email: 'joan@joan.joan', organizationId: 'o002'},
@@ -122,7 +122,7 @@ describe('Chaining Promises with .then(cb) and .catch(cb)', () => {
 });
 
 describe('Combining Promises with the Promise.all combinator', () => {
-  describe('#makeGetUserAndOrganizationById(getUserById, getOrganizationById) => (userId, organizationId) => Promise', () => {
+  describe('EX4: #makeGetUserAndOrganizationById(getUserById, getOrganizationById) => (userId, organizationId) => Promise', () => {
     const users = {
       'u001': {id: 'u001', name: 'Jeff', email: 'jeff@jeff.jeff', organizationId: 'o001'},
       'u002': {id: 'u002', name: 'Joan', email: 'joan@joan.joan', organizationId: 'o002'},
@@ -182,7 +182,7 @@ describe('Combining Promises with the Promise.all combinator', () => {
         });
     });
   });
-  describe('#makeGetUsersByIdWithOrganizations(getUserById, getOrganizationById) => (ids) => Promise', () => {
+  describe('EX5: #makeGetUsersByIdWithOrganizations(getUserById, getOrganizationById) => (ids) => Promise', () => {
     const users = {
       'u001': {id: 'u001', name: 'Jeff', email: 'jeff@jeff.jeff', organizationId: 'o001'},
       'u002': {id: 'u002', name: 'Joan', email: 'joan@joan.joan', organizationId: 'o002'},

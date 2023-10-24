@@ -10,7 +10,7 @@ const {
 } = require('./answers');
 
 describe('Async function that returns a Promise to be fufilled', () => {
-  describe('async fn makePromiseResolveWith3:() => Promise<number>', () => {
+  describe('EX1: #makePromiseResolveWith3:() => Promise<number>', () => {
     it('is an async function', () => {
       assert(makePromiseResolveWith3.constructor.name === 'AsyncFunction');
     });
@@ -24,7 +24,7 @@ describe('Async function that returns a Promise to be fufilled', () => {
 });
 
 describe('Async function that returns a Promise to be rejected', () => {
-  describe('#async fn makePromiseRejectWithBoo:() => Promise<,string>', () => {
+  describe('EX2: #makePromiseRejectWithBoo:() => Promise<,string>', () => {
     it('is an async function', () => {
       assert(makePromiseRejectWithBoo.constructor.name === 'AsyncFunction');
     });
@@ -40,7 +40,7 @@ describe('Async function that returns a Promise to be rejected', () => {
 });
 
 describe('Async function that chains two async processes', () => {
-  describe('#chainTwoAsyncProcesses(firstPromise, slowAsyncProcess)', () => {
+  describe('EX3: #chainTwoAsyncProcesses(firstPromise, slowAsyncProcess)', () => {
     it('is an async function', () => {
       assert(chainTwoAsyncProcesses.constructor.name === 'AsyncFunction');
     });
@@ -73,7 +73,7 @@ describe('Async function that chains two async processes', () => {
 });
 
 describe('Use async functions to fetch user data from a database', () => {
-  describe('#makeAsyncGetUserByIdWithOrganization(getUserById, getOrganizationById) => async (id) => Promise', () => {
+  describe('EX4: #makeAsyncGetUserByIdWithOrganization(getUserById, getOrganizationById) => async (id) => Promise', () => {
     const users = {
       'u001': {id: 'u001', name: 'Jeff', email: 'jeff@jeff.jeff', organizationId: 'o001'},
       'u002': {id: 'u002', name: 'Joan', email: 'joan@joan.joan', organizationId: 'o002'},
@@ -129,7 +129,7 @@ describe('Use async functions to fetch user data from a database', () => {
     });
   });
   
-  describe('#makeAsyncGetUserAndOrganizationById(getUserById, getOrganizationById) => async (userId, organizationId) => Promise', () => {
+  describe('EX5: #makeAsyncGetUserAndOrganizationById(getUserById, getOrganizationById) => async (userId, organizationId) => Promise', () => {
     const users = {
       'u001': {id: 'u001', name: 'Jeff', email: 'jeff@jeff.jeff', organizationId: 'o001'},
       'u002': {id: 'u002', name: 'Joan', email: 'joan@joan.joan', organizationId: 'o002'},
@@ -194,7 +194,7 @@ describe('Use async functions to fetch user data from a database', () => {
     });
   });
   
-  describe('#makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById) => async (ids) => Promise', () => {
+  describe('EX6: #makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById) => async (ids) => Promise', () => {
     const users = {
       'u001': {id: 'u001', name: 'Jeff', email: 'jeff@jeff.jeff', organizationId: 'o001'},
       'u002': {id: 'u002', name: 'Joan', email: 'joan@joan.joan', organizationId: 'o002'},

@@ -40,7 +40,7 @@ describe('#passwordCheckerCb(email:string, password:string, cb:(User, Error) => 
     passwordCheckerCb('jeff@jeff.jeff', 'jim', testCallback);
   });
 });
-describe('#passwordCheckerPrms(email:string, password:string): Promise<User, Error>', () => {
+describe('EX1: #passwordCheckerPrms(email:string, password:string): Promise<User, Error>', () => {
   it('replies promptly with a user with the correct email and password', () => {
     return passwordCheckerPrms('jeff@jeff.jeff', 'jeff')
       .then((user) => {
@@ -73,7 +73,7 @@ describe('#passwordCheckerPrms(email:string, password:string): Promise<User, Err
       }); 
   });
 });
-describe('#makePromiseFromFunctionWithCallback:(fn:([...params,] cb: (err:E, val:T) => void)) => void)=>([...params]) => Promise<T,E>', () => {
+describe('EX2: #makePromiseFromFunctionWithCallback:(fn:([...params,] cb: (err:E, val:T) => void)) => void)=>([...params]) => Promise<T,E>', () => {
   it('turns a resolving callback function into a resolving promise', () => {
     function resolver(cb){
       cb(null, 'Hello');

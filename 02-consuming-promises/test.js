@@ -6,7 +6,7 @@ const {
 } = require('./answers');
 
 describe('Consuming Promises with .then(cb) and .catch(cb)', () => {
-  describe('#waitForPromise(promise, action) => void', () => {
+  describe('EX1: #waitForPromise(promise, action) => void', () => {
     it('waits until the promise is done to perform the action.', (done) => {
       const start = new Date();
 
@@ -24,7 +24,7 @@ describe('Consuming Promises with .then(cb) and .catch(cb)', () => {
       waitForPromise(delayPromise, action);
     });
   });
-  describe('#consumePromise(promise, consumer, errorHandler) => void', () => {
+  describe('EX2: #consumePromise(promise, consumer, errorHandler) => void', () => {
     it('calls the consumer on the resolve value of the promise', (done) => {
       const resolvedPromise = Promise.resolve('Yay!');
       function consumer(val){

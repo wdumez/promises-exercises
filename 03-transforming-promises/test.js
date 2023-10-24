@@ -8,7 +8,7 @@ const {
 } = require('./answers');
 
 describe('Transforming Promises with .then(cb) and .catch(cb)', () => {
-  describe('#mapPromise(promise, transformer) => Promise', () => {
+  describe('EX1: #mapPromise(promise, transformer) => Promise', () => {
     it('transforms a promises resolution value', () => {
       return mapPromise(Promise.resolve(3), (val) => {
         return val + val;
@@ -38,7 +38,7 @@ describe('Transforming Promises with .then(cb) and .catch(cb)', () => {
     });
   });
 
-  describe('#squarePromise(promise) => Promise', () => {
+  describe('EX2: #squarePromise(promise) => Promise', () => {
     it('squares the resolution value of the promise', () => {
       return squarePromise(Promise.resolve(5))
         .then((val) => {
@@ -68,7 +68,7 @@ describe('Transforming Promises with .then(cb) and .catch(cb)', () => {
         });
     });
   });
-  describe('#squarePromiseOrZero(promise) => Promise', () => {
+  describe('EX3: #squarePromiseOrZero(promise) => Promise', () => {
     it('squares the resolution value of the promise', () => {
       return squarePromiseOrZero(Promise.resolve(5))
         .then((val) => {
@@ -96,7 +96,7 @@ describe('Transforming Promises with .then(cb) and .catch(cb)', () => {
         });
     });
   });
-  describe('#switcheroo(promise) => Promise', () => {
+  describe('EX4: #switcheroo(promise) => Promise', () => {
     it('rejects when the input promise resolves', () => {
       return switcheroo(Promise.resolve(3))
         .then((val) => {

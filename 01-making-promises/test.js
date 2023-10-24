@@ -7,7 +7,7 @@ const {
   makeDelayPromise,
 } = require('./answers');
 describe('Promise.resolve: (val:T) => Promise<T>', () => {
-  describe('#makePromiseResolveWith3:() => Promise<number>', () => {
+  describe('EX1: #makePromiseResolveWith3:() => Promise<number>', () => {
     it('creates a resolving promise', () => {
       return makePromiseResolveWith3()
         .then((val) => {
@@ -18,7 +18,7 @@ describe('Promise.resolve: (val:T) => Promise<T>', () => {
 });
 
 describe('Promise.reject: (err:T) => Promise<,T>', () => {
-  describe('#makePromiseRejectWithBoo:() => Promise<,string>', () => {
+  describe('EX2: #makePromiseRejectWithBoo:() => Promise<,string>', () => {
     it('creates a rejecting promise', () => {
       return makePromiseRejectWithBoo()
         .then(() => {
@@ -31,7 +31,7 @@ describe('Promise.reject: (err:T) => Promise<,T>', () => {
 });
 
 describe('Promise constructor "new Promise((resolve, reject) => void) => Promise', () => {
-  describe('#makePromiseWithConstructor: (boolean) => Promise<undefined,undefined>', () => {
+  describe('EX3: #makePromiseWithConstructor: (boolean) => Promise<undefined,undefined>', () => {
     it('creates a promise that will resolve', () => {
       return makePromiseWithConstructor(true);
     });
@@ -42,7 +42,7 @@ describe('Promise constructor "new Promise((resolve, reject) => void) => Promise
         }, () => {});
     });
   });
-  describe('#makeDelayPromise: (A, number) => Promise<A>', () =>{
+  describe('EX4: #makeDelayPromise: (A, number) => Promise<A>', () =>{
     it('returns a promise that resolves with the value', () => {
       const start = new Date();
       return makeDelayPromise('Hello', 0)
