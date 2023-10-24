@@ -13,19 +13,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lighthouse-labs/promises-exercises.git"
+    "url": "git+https://github.com/tvcutsem/promises-exercises.git"
   },
   "keywords": [
     "promises",
     "js",
     "async"
   ],
-  "author": "Joel Shinness <me@joelshinness.com> (http://joelshinness.com)",
+  "author": "Joel Shinness <me@joelshinness.com> (http://joelshinness.com) with adaptations by Tom Van Cutsem (https://tvcutsem.github.io)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lighthouse-labs/promises-exercises/issues"
+    "url": "https://github.com/tvcutsem/promises-exercises/issues"
   },
-  "homepage": "https://github.com/lighthouse-labs/promises-exercises#readme",
+  "homepage": "https://github.com/tvcutsem/promises-exercises#readme",
   "dependencies": {
     "eslint": "^5.1.0",
     "mocha": "^5.2.0"

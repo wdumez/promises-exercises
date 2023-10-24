@@ -4,7 +4,10 @@ Set of exercises in using JS promises for handling asynchronous operations.
 
 ## Setup
 
-1. Fork this repository.
+Verify that `node --version` returns at least `v19.0.0` or later.
+If not, install a recent version of node.js per the standard [installation instructions](https://nodejs.org/en/download/package-manager).
+
+1. Fork or clone this repository.
 2. Run `npm install` to download the Node modules.
 
 ## Using
