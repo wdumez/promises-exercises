@@ -12,7 +12,7 @@ Adapted from [this repository](https://github.com/lighthouse-labs/promises-exerc
 1. Fork or clone this repository.
 2. Run `npm install` to download the Node modules.
 
-Don't want to install anything on your machine? You can edit and run all the code in a browser using replit. Go to [https://replit.com/](replit.com), sign up, create a new REPL, select 'Import from GitHub', fill in this repository's URL and choose 'Node.js' as the template. Then run `npm install` in the provided shell.
+Don't want to install anything on your machine? You can edit and run all the code in a browser using replit. Go to [replit.com](https://replit.com/), sign up, create a new REPL, select 'Import from GitHub', fill in this repository's URL and choose 'Node.js' as the template. Then run `npm install` in the provided shell.
 
 ## Using
 
