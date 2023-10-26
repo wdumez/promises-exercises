@@ -8,11 +8,11 @@ Adapted from [this repository](https://github.com/lighthouse-labs/promises-exerc
 
 ## Setup
 
-Verify that `node --version` returns at least `v19.0.0` or later.
-If not, install a recent version of node.js per the standard [installation instructions](https://nodejs.org/en/download/package-manager).
-
+0. Verify that `node --version` returns at least `v19.0.0` or later. If not, install a recent version of node.js per the standard [installation instructions](https://nodejs.org/en/download/package-manager).
 1. Fork or clone this repository.
 2. Run `npm install` to download the Node modules.
+
+Don't want to install anything on your machine? You can edit and run all the code in a browser using replit. Go to [https://replit.com/](replit.com), sign up, create a new REPL, select 'Import from GitHub', fill in this repository's URL and choose 'Node.js' as the template. Then run `npm install` in the provided shell.
 
 ## Using
 
