@@ -3,9 +3,9 @@
  * @param {string} password 
  * @returns {User | undefined}
  */
-function passwordChecker(email, password){
-  if(email === 'jeff@jeff.jeff' && password === 'jeff'){
-    return {name: 'Jeff Jeffries', email: 'jeff@jeff.jeff'};
+function passwordChecker(email, password) {
+  if (email === 'jeff@jeff.jeff' && password === 'jeff') {
+    return { name: 'Jeff Jeffries', email: 'jeff@jeff.jeff' };
   }
   return undefined;
 }
@@ -15,9 +15,9 @@ function passwordChecker(email, password){
  * @param {string} password 
  * @param {nodeStyleCallback} cb 
  */
-function passwordCheckerCb(email, password, cb){
+function passwordCheckerCb(email, password, cb) {
   const user = passwordChecker(email, password);
-  if(user){
+  if (user) {
     cb(null, user);
   } else {
     setTimeout(() => {
@@ -34,10 +34,15 @@ function passwordCheckerCb(email, password, cb){
  * @param {string} password 
  * @returns {Promise<User, string>}
  */
-function passwordCheckerPrms(email, password){
+function passwordCheckerPrms(email, password) {
   return new Promise((resolve, reject) => {
     passwordCheckerCb(email, password, (error, user) => {
-      /* IMPLEMENT ME! */
+      if (error) {
+        reject(error)
+      }
+      else {
+        resolve(user)
+      }
     });
   });
 }
