@@ -102,7 +102,7 @@ function makeGetUsersByIdWithOrganizations(getUserById, getOrganizationById) {
    */
   return function getUserByIdWithOrganization(userIds) {
     // We don't want to return an array of promises,
-    // but rathera promise containing an array of values.
+    // but rather a promise containing an array of values.
     return Promise.all(userIds.map((userId) => {
       // Same as exercise 3:
       return getUserById(userId)

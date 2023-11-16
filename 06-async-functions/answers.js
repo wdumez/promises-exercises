@@ -5,8 +5,8 @@
  * 
  * @returns {Promise<3>}
  */
-async function makePromiseResolveWith3(){
-  /* IMPLEMENT ME! */
+async function makePromiseResolveWith3() {
+  return 3;
 }
 
 /**
@@ -15,8 +15,8 @@ async function makePromiseResolveWith3(){
  * 
  * @returns {Promise<,"Boo!">}
  */
-async function makePromiseRejectWithBoo(){
-  /* IMPLEMENT ME! */
+async function makePromiseRejectWithBoo() {
+  throw "Boo!";
 }
 
 /**
@@ -26,8 +26,10 @@ async function makePromiseRejectWithBoo(){
  * @param {Promise} firstPromise 
  * @param {function} slowAsyncProcess 
  */
-async function chainTwoAsyncProcesses(firstPromise, slowAsyncProcess){
-  /* IMPLEMENT ME! */
+async function chainTwoAsyncProcesses(firstPromise, slowAsyncProcess) {
+  let arg = await firstPromise;
+  let result = await slowAsyncProcess(arg);
+  return result;
 }
 
 /**
@@ -37,15 +39,25 @@ async function chainTwoAsyncProcesses(firstPromise, slowAsyncProcess){
  * @param {function} getUserById 
  * @param {function} getOrganizationById 
  */
-function makeAsyncGetUserByIdWithOrganization(getUserById, getOrganizationById){
+function makeAsyncGetUserByIdWithOrganization(getUserById, getOrganizationById) {
   /**
    * @param {string} userId 
    */
-  return async function getUserByIdWithOrganization(userId){
-    /* IMPLEMENT ME! */
+  return async function getUserByIdWithOrganization(userId) {
+    let userObject = await getUserById(userId);
+    if (!userObject) {
+      return undefined
+    }
+    let organizationObject = await getOrganizationById(userObject.organizationId);
+    if (!organizationObject) {
+      return undefined
+    }
+    let newObject = userObject;
+    newObject.organization = organizationObject;
+    return newObject;
   };
 }
-  
+
 /**
  * 
  * EXERCISE 5
@@ -53,13 +65,26 @@ function makeAsyncGetUserByIdWithOrganization(getUserById, getOrganizationById){
  * @param {function} getUserById 
  * @param {function} getOrganizationById 
  */
-function makeAsyncGetUserAndOrganizationById(getUserById, getOrganizationById){
+function makeAsyncGetUserAndOrganizationById(getUserById, getOrganizationById) {
   /**
    * @param {string} userId 
    * @param {string} organizationId
   */
-  return async function getUserByIdWithOrganization(userId, organizationId){
-    /* IMPLEMENT ME! */
+  return async function getUserByIdWithOrganization(userId, organizationId) {
+    let userObjectP = getUserById(userId);
+    let organizationObjectP = getOrganizationById(organizationId);
+    // Use Promise.all instead. (await ...)
+    let [userObject, organizationObject] = await Promise.all(
+      [
+        getUserById(userId),
+        getOrganizationById(organizationId)
+      ]
+    )
+    if (userObject && organizationObject) {
+      return { ...userObject, organization: organizationObject };
+    } else {
+      return undefined;
+    }
   };
 }
 
@@ -70,12 +95,12 @@ function makeAsyncGetUserAndOrganizationById(getUserById, getOrganizationById){
  * @param {function} getUserById 
  * @param {function} getOrganizationById 
  */
-function makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById){
+function makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById) {
   /**
    * @param {Array<string>} userIds
    */
-  return async function getUserByIdWithOrganization(userIds){
-    /* IMPLEMENT ME! */
+  return async function getUserByIdWithOrganization(userIds) {
+
   };
 }
 
