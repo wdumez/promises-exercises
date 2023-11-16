@@ -101,7 +101,7 @@ function makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById
     );
     const organizationObjects = await Promise.all(
       userObjects.map((userObject) => {
-        if (userObject) {
+        if (!userObject) {
           return getOrganizationById(userObject.organizationId)
         }
         else {
@@ -111,7 +111,7 @@ function makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById
     );
     return await Promise.all(
       userObjects.map((userObject, idx) => {
-        if (userObject && organizationObjects[idx]) {
+        if (!(userObject && organizationObjects[idx])) {
           return { ...userObject, organization: organizationObjects[idx] }
         } else {
           return undefined
