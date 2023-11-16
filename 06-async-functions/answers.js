@@ -71,14 +71,8 @@ function makeAsyncGetUserAndOrganizationById(getUserById, getOrganizationById) {
    * @param {string} organizationId
   */
   return async function getUserByIdWithOrganization(userId, organizationId) {
-    let userObjectP = getUserById(userId);
-    let organizationObjectP = getOrganizationById(organizationId);
-    // Use Promise.all instead. (await ...)
     let [userObject, organizationObject] = await Promise.all(
-      [
-        getUserById(userId),
-        getOrganizationById(organizationId)
-      ]
+      [getUserById(userId), getOrganizationById(organizationId)]
     )
     if (userObject && organizationObject) {
       return { ...userObject, organization: organizationObject };
@@ -100,7 +94,30 @@ function makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById
    * @param {Array<string>} userIds
    */
   return async function getUserByIdWithOrganization(userIds) {
-
+    const userObjects = await Promise.all(
+      userIds.map((userId) => {
+        return getUserById(userId)
+      })
+    );
+    const organizationObjects = await Promise.all(
+      userObjects.map((userObject) => {
+        if (userObject) {
+          return getOrganizationById(userObject.organizationId)
+        }
+        else {
+          return undefined
+        }
+      })
+    );
+    return await Promise.all(
+      userObjects.map((userObject, idx) => {
+        if (userObject && organizationObjects[idx]) {
+          return { ...userObject, organization: organizationObjects[idx] }
+        } else {
+          return undefined
+        }
+      })
+    )
   };
 }
 
