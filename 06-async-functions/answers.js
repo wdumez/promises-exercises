@@ -101,35 +101,21 @@ function makeAsyncGetUsersByIdWithOrganizations(getUserById, getOrganizationById
     );
     const organizationObjects = await Promise.all(
       userObjects.map((userObject) => {
-<<<<<<< HEAD
-        if (!userObject) {
-          return undefined
-        }
-        return getOrganizationById(userObject.organizationId)
-=======
         if (userObject) {
           return getOrganizationById(userObject.organizationId)
         }
         else {
           return undefined
         }
->>>>>>> 1f00f626f1a2639d21ffa993ff3c64600c5d5f39
       })
     );
     return await Promise.all(
       userObjects.map((userObject, idx) => {
-<<<<<<< HEAD
-        if (!(userObject && organizationObjects[idx])) {
-          return undefined
-        }
-        return { ...userObject, organization: organizationObjects[idx] }
-=======
         if (userObject && organizationObjects[idx]) {
           return { ...userObject, organization: organizationObjects[idx] }
         } else {
           return undefined
         }
->>>>>>> 1f00f626f1a2639d21ffa993ff3c64600c5d5f39
       })
     )
   };
